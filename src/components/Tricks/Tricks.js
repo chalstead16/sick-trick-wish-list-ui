@@ -2,7 +2,7 @@ import { toBePartiallyChecked } from "@testing-library/jest-dom/dist/matchers";
 import React from "react";
 
 const Tricks = ({tricks}) => {
-    const trickInfo = tricks.map(trick => {
+    const trickCards = tricks.map(trick => {
         return (
             <TrickCard
                 name={trick.name}
@@ -14,6 +14,12 @@ const Tricks = ({tricks}) => {
             />
         )
     })
+
+    return (
+        <div className='tricks-container'>
+            {trickCards}
+        </div>
+    )
 }
 
 export default Tricks;
