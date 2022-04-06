@@ -1,9 +1,9 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import getTricksData from '../../apiCalls';
+
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
       tricks: []
@@ -11,8 +11,9 @@ class App extends Component {
   }
 
   getTricks = () => {
-    getTricksData()
-    .then(data => this.setState({tricks: data}));
+    fetch('http://localhost:3001/api/v1/tricks')
+    .then(response => response.json())
+    .then(data => this.setState({tricks: data}))
   }
 
   componentDidMount = () => this.getTricks()
@@ -21,6 +22,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Sick Trick Wish List</h1>
+        <Tricks tricks={this.state.tricks} />
       </div>
     );
   }
