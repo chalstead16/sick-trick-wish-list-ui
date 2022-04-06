@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Tricks from '../Tricks/Tricks';
+import Form from '../Form/Form';
 
 
 class App extends Component {
@@ -19,10 +20,15 @@ class App extends Component {
 
   componentDidMount = () => this.getTricks()
 
+  addTrick = (newTrick) => {
+    this.setState({ tricks: [...this.state.tricks, newTrick] })
+  }
+
   render() {
     return (
       <div className="App">
         <h1>Sick Trick Wish List</h1>
+        <Form addTrick={this.addTrick} />
         <Tricks tricks={this.state.tricks} />
       </div>
     );
