@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 class Form extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             stance: '',
             name: '',
@@ -11,10 +11,29 @@ class Form extends Component {
         }
     }
 
+    handleChange = event => {
+        this.setState({ [event.target.name]: event.target.value });
+      }
+
+    submitTrick = event => {
+        event.preventDefault();
+        const newTrick = {
+            id: Date.now(),
+            ...this.state
+        }
+        this.props.addTrick(newTrick);
+    }
+
+    clearInputs = () => {
+        this.setState({ stance: '', name: '', obstacle: '', tutorial: '' });
+    }
+
     render() {
         return (
             <form>
-                <select name='stance'>
+                <select 
+                    name='stance' 
+                    onChange={event => this.handleChange(event)}>
                     <option value=' '>Choose your Stance</option>
                     <option value={this.state.stance}>Regular</option>
                     <option value={this.state.stance}>Switch</option>
@@ -25,9 +44,13 @@ class Form extends Component {
                     placeholder='Name of Trick'
                     name='name'
                     value={this.state.name}
+                    onChange={event => this.handleChange(event)}
                 />
 
-                <select id='obstacle'>
+                <select 
+                    name='obstacle'
+                    onChange={event => this.handleChange(event)}>
+                    <option value=' '>Choose your Obstacle</option>
                     <option value={this.state.obstacle}>Flatground</option>
                     <option value={this.state.obstacle}>Ledge</option>
                     <option value={this.state.obstacle}>Rail</option>
@@ -40,9 +63,10 @@ class Form extends Component {
                     placeholder='Tutorial'
                     name='tutorial'
                     value={this.state.tutorial}
+                    onChange={event => this.handleChange(event)}
                 />
 
-                <button>Send it!</button>
+                <button onClick={event => this.submitTrick(event)}>Send it!</button>
             </form>
         )
     }
