@@ -1,4 +1,5 @@
 import React from "react";
+import './TrickCard.css';
 
 const TrickCard = ({stance, name, obstacle, tutorial}) => {
     return (
