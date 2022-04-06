@@ -1,5 +1,5 @@
-import { toBePartiallyChecked } from "@testing-library/jest-dom/dist/matchers";
 import React from "react";
+import TrickCard from '../TrickCard/TrickCard';
 
 const Tricks = ({tricks}) => {
     const trickCards = tricks.map(trick => {
