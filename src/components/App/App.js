@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Tricks from '../Tricks/Tricks';
+import Form from '../Form/Form';
 
 
 class App extends Component {
@@ -23,6 +24,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Sick Trick Wish List</h1>
+        <Form />
         <Tricks tricks={this.state.tricks} />
       </div>
     );
