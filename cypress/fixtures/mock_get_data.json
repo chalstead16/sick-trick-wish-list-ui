@@ -1,0 +1,14 @@
+[
+  {
+    "stance": "Regular",
+    "name": "get1",
+    "obstacle": "Rail",
+    "tutorial": "getexample.com"
+  },
+  {
+    "stance": "Regular",
+    "name": "get2",
+    "obstacle": "Rail",
+    "tutorial": "getexample.com"
+  }
+]
