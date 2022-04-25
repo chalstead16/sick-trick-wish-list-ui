@@ -1,38 +1,35 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Tricks from '../Tricks/Tricks';
 import Form from '../Form/Form';
+import {fetchTricks, postTrick} from '../../apiCalls.js';
 
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      tricks: []
-    }
+const App = () => {
+ const [tricks, setTricks] = useState([]);
+
+  const getTricks = () => {
+    fetchTricks()
+    .then(data => setTricks(data))
   }
 
-  getTricks = () => {
-    fetch('http://localhost:3001/api/v1/tricks')
-    .then(response => response.json())
-    .then(data => this.setState({tricks: data}))
+  useEffect(() => getTricks(),[])
+
+  const addTrick = (newTrick) => {
+    postTrick(newTrick)
+    .then((data) => setTricks([data, ...tricks]))
   }
 
-  componentDidMount = () => this.getTricks()
+// if I use .then I would to setState with the data from Post request
+//OR I could use newTrick to setState without using data from Post
 
-  addTrick = (newTrick) => {
-    this.setState({ tricks: [...this.state.tricks, newTrick] })
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <h1>Sick Trick Wish List</h1>
-        <Form addTrick={this.addTrick} />
-        <Tricks tricks={this.state.tricks} />
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <h1>Sick Trick Wish List</h1>
+      <Form addTrick={addTrick} />
+      <Tricks tricks={tricks} />
+    </div>
+  );
 }
 
 export default App;
